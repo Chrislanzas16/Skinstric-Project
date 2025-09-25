@@ -1,0 +1,36 @@
+.home-title{
+  width: 680px;
+height: 240px;
+opacity: 1;
+color: rgba(26, 27, 28, 1);
+font-style: normal;
+font-weight: 300;
+font-size: 128px;
+line-height: 120px;
+letter-spacing: -7px;
+}
+
+.home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+    transform: translateY(-10%);
+    position: relative;
+}
+
+.home-para{
+    position: absolute;
+    bottom: 30px;
+    left: 32px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0;
+     color: rgba(26, 27, 28, 1);
+     width: 316px;
+     height: 72px;
+     text-transform: uppercase;
+     text-align: left;
+}
