@@ -1,11 +1,12 @@
 .navbtn{
+cursor: pointer;
 color: rgba(26, 27, 28, 1);
 background-color: white;
 border: none;
-font-weight: 600;
+font-weight: 500;
 font-size: 14px;
 line-height: 16px;
-cursor: pointer;
+z-index: 9999;
 }
 
 .navbar-left{
@@ -14,10 +15,13 @@ cursor: pointer;
 }
 
 .navbar{
-    margin: 23px 32px 0 32px;
+   padding: 0 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 1000;
+    height: 72px;
+    box-sizing: border-box;
 }
 
 h5{

@@ -1,28 +1,31 @@
 .home-title{
-  width: 680px;
-height: 240px;
+  max-width: 12ch;
 opacity: 1;
 color: rgba(26, 27, 28, 1);
-font-style: normal;
-font-weight: 300;
-font-size: 128px;
-line-height: 120px;
-letter-spacing: -7px;
+font-weight: 400;
+font-size: clamp(2rem, 10vw, 100px);
+line-height: 1.1em;
+letter-spacing: clamp(-3px, -0.5vw, -7px);
+margin: 0 auto;
+text-align: center;
 }
 
-.home{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.home {
+height:calc(100vh - 72px);
+}
+
+.home-grid{
+    height: 100%;
+    display: grid;
+   place-items: center;
     text-align: center;
-    height: 100vh;
-    transform: translateY(-10%);
     position: relative;
+    padding: 0 80px;
 }
 
 .home-para{
     position: absolute;
-    bottom: 30px;
+   bottom: 32px;
     left: 32px;
     font-weight: 400;
     font-size: 14px;
@@ -30,7 +33,73 @@ letter-spacing: -7px;
     letter-spacing: 0;
      color: rgba(26, 27, 28, 1);
      width: 316px;
-     height: 72px;
      text-transform: uppercase;
      text-align: left;
+}
+
+.left-button, .right-button{
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    gap: 8px;
+    width: auto;
+    height: auto;
+    border: none;
+    background-color: white;
+}
+
+.left-img{
+    width: 44px;
+    height: 44px;
+}
+
+.left-text, .right-text{
+    background-color: white;
+    border: none;
+    width: 90px;
+    height: 16px;
+    opacity: 70%;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: rgba(26, 27, 28, 1);
+    z-index: 2;
+}
+
+.left-rail-container, .right-rail-container {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+   width: 500px;
+   height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.left-rail-container {left:0; transform: translate(-60%, -60%);}
+.right-rail-container {right:0; transform: translate(60%, -60%);}
+
+.diamond {
+    position: absolute;
+    inset: 0;
+    border: 2px dashed rgba(160, 164, 171, 1);
+    transform: rotate(45deg);
+    background: transparent;
+    pointer-events: none;
+    opacity: .28;
+    z-index: 1;
+}
+
+.left-button{
+    transform: translate(150%);
+}
+
+.right-button{
+   transform: translate(-150%);
 }
