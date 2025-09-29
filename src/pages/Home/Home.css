@@ -8,6 +8,8 @@ line-height: 1.1em;
 letter-spacing: clamp(-3px, -0.5vw, -7px);
 margin: 0 auto;
 text-align: center;
+transform: translateX(0);
+transition: transform 0.6s ease-in-out, opacity 0.4s ease;
 }
 
 .home {
@@ -51,10 +53,6 @@ height:calc(100vh - 72px);
     background-color: white;
 }
 
-.left-img{
-    width: 44px;
-    height: 44px;
-}
 
 .left-text, .right-text{
     background-color: white;
@@ -85,7 +83,7 @@ height:calc(100vh - 72px);
 .left-rail-container {left:0; transform: translate(-60%, -60%);}
 .right-rail-container {right:0; transform: translate(60%, -60%);}
 
-.diamond {
+.diamonds {
     position: absolute;
     inset: 0;
     border: 2px dashed rgba(160, 164, 171, 1);
@@ -93,7 +91,7 @@ height:calc(100vh - 72px);
     background: transparent;
     pointer-events: none;
     opacity: .28;
-    z-index: 1;
+    
 }
 
 .left-button{
@@ -102,4 +100,35 @@ height:calc(100vh - 72px);
 
 .right-button{
    transform: translate(-150%);
+}
+
+.left-button, .right-button, .diamond {
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.shift-right {
+    transform: translate(40%);
+    
+}
+
+.shift-left {
+    transform: translate(-40%);
+}
+
+.faded{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.left-img, .right-img {
+    width: 44px;
+    height: 44px;
+    transition: transform 0.3s ease;
+}
+
+
+.left-button.isHovered .left-img,
+.right-button.isHovered .right-img
+{
+    transform: scale(1.12);
 }
