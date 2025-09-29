@@ -10,31 +10,54 @@ const Login = () => {
   const [city, setCity] = useState("");
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const valid = /^[A-Za-z\s'-]+$/;
 
     if (step === "username") {
+      if (!valid.test(username)) {
+        setError(
+          "Please enter a valid name without numbers or special characters"
+        );
+        setUsername("");
+        return;
+      }
       localStorage.setItem("username", username);
+      setError("");
       setStep("city");
       return;
     }
-    setLoading(true);
-    try {
+
+    if (step === "city") {
+      if (!valid.test(city)) {
+        setError(
+          "Please enter a valid city without numbers or special characters"
+        );
+        setCity("");
+        return;
+      }
       localStorage.setItem("city", city);
-      await fetch(
-        "https://us-central1-frontend-simplified.cloudfunctions.net/skinstricPhaseOne",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, city }),
-        }
-      );
-      setDone(true);
-    } catch (err) {
-      console.log("ERROR", err);
-    } finally {
-      setLoading(false);
+      setError("");
+      setLoading(true);
+
+      try {
+        localStorage.setItem("city", city);
+        await fetch(
+          "https://us-central1-frontend-simplified.cloudfunctions.net/skinstricPhaseOne",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, city }),
+          }
+        );
+        setDone(true);
+      } catch (err) {
+        console.log("ERROR", err);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -67,6 +90,7 @@ const Login = () => {
           ) : (
             <>
               <p>CLICK TO TYPE</p>
+              {error && <p className="error">{error}</p>}
               <form onSubmit={handleSubmit} className="form-content">
                 {step === "username" ? (
                   <input

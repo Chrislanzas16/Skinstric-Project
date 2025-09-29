@@ -9,6 +9,8 @@ const Home = () => {
   return (
     <div className="home">
       <div className="home-grid">
+        <div className="diamond-frame"></div>
+        <div className="diamond-frame s1"></div>
         <div className="left-rail-container">
           <div
             className={`diamonds ${isHovered === "right" ? "faded" : ""}`}
@@ -32,29 +34,34 @@ const Home = () => {
         >
           Sophisticated skincare
         </h1>
+        <p className="home-para">
+          Skinstric developed an A.I. that creates a highly-personalised routine
+          tailored to what your skin needs.
+        </p>
+
+        <Link to="login">
+         <button className="enter-mobile">ENTER EXPERIENCE
+             <img className="right-img" src={right_btn} alt="" />
+         </button>
+        </Link>
 
         <div className="right-rail-container">
           <div
             className={`diamonds ${isHovered === "left" ? "faded" : ""}`}
           ></div>
           <Link to="/login">
-          <button
-            className={`right-button ${
-              isHovered === "right" ? "isHovered" : ""
-            } ${isHovered === "left" ? "faded" : ""}`}
-            onMouseEnter={() => setIsHovered("right")}
-            onMouseLeave={() => setIsHovered(null)}
-          >
-            <span className="right-text"> TAKE TEST</span>
-            <img className="right-img" src={right_btn} alt="" />
-          </button>
+            <button
+              className={`right-button ${
+                isHovered === "right" ? "isHovered" : ""
+              } ${isHovered === "left" ? "faded" : ""}`}
+              onMouseEnter={() => setIsHovered("right")}
+              onMouseLeave={() => setIsHovered(null)}
+            >
+              <span className="right-text"> TAKE TEST</span>
+              <img className="right-img" src={right_btn} alt="" />
+            </button>
           </Link>
         </div>
-
-        <p className="home-para">
-          Skinstric developed an A.I. that creates a highly-personalised routine
-          tailored to what your skin needs.
-        </p>
       </div>
     </div>
   );

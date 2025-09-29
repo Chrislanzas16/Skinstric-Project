@@ -11,6 +11,8 @@ z-index: 100;
 
 .navbar-left{
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 20px;
 }
 

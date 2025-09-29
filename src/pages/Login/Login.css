@@ -1,3 +1,7 @@
+body{
+    overflow: hidden;
+    height: 100vh;
+}
 .sub-header {
   width: 227px;
   height: 24px;
@@ -124,20 +128,20 @@ p {
 }
 
 .d1 {
-  width: clamp(400px, 42vw, 480px);
-  height: clamp(320px, 42vw, 480px);
+  width: clamp(100px, 42vw, 480px);
+  height: clamp(110px, 42vw, 480px);
   opacity: 0.8;
   animation-duration: 95s;
 }
 .d2 {
-  width: clamp(400px, 54vw, 550px);
-  height: clamp(400px, 54vw, 550px);
+  width: clamp(160px, 54vw, 550px);
+  height: clamp(140px, 54vw, 550px);
   opacity: 0.4;
   animation-duration: 120s;
 }
 .d3 {
-  width: clamp(500px, 68vw, 600px);
-  height: clamp(500px, 68vw, 600px);
+  width: clamp(150px, 68vw, 600px);
+  height: clamp(150px, 68vw, 600px);
   opacity: 0.2;
   animation-duration: 160s;
 }
@@ -237,3 +241,10 @@ p {
 .proceed-btn a {
   text-decoration: none;
 }
+
+.error{
+    color: rgb(255, 0, 0);
+    font-weight: 600;
+    font-size: 16px;
+}
+
