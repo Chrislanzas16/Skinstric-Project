@@ -13,6 +13,10 @@
   transition: transform 0.6s ease-in-out, opacity 0.4s ease;
 }
 
+a {
+    text-decoration: none;
+}
+
 .home {
   height: calc(100vh - 72px);
 }
@@ -168,23 +172,25 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    gap: 16px;
+    gap: 14px;
     padding: 0 16px;
   }
 
   .enter-mobile {
     position: relative;
+    font-weight: 500;
     z-index: 2;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    gap: 8px;
+     gap: 8px;
     width: auto;
     height: auto;
     border: none;
     background-color: white;
     display: inline-flex;
+    transition: transform 0.3s ease;
   }
 
   .diamond-frame{
@@ -192,21 +198,25 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 400px;
-    height: 400px;
-    border: 1px dashed #999;
+    width: 370px;
+    height: 370px;
+    border: 2px dashed #999;
     transform: translate(-50%, -50%) rotate(45deg);
     z-index: 0;
     opacity: 0.4;
   }
 
   .s1{
-    width: 500px;
-    height: 500px;
+    width: 450px;
+    height: 450px;
   }
 
   .home-title {
     font-size: 60px;
+  }
+
+  .enter-mobile:hover{
+    transform: scale(1.1);
   }
 
 
