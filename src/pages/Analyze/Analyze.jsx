@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import back_btn from "../../assets/images/buttin-icon-shrunk (1).svg";
 import scan_img from "../../assets/images/shutter.svg";
@@ -7,6 +7,53 @@ import access_gallery from "../../assets/images/gallery.svg";
 import "./Analyze.css";
 
 const Analyze = () => {
+const fileInputRef = useRef(null);
+
+const triggerFileInput = () => {
+    fileInputRef.current.click()
+  }
+
+
+const handleFileChange = (event) => {
+  const file = event.target.files?.[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const dataUrl = String(reader.result);
+      const base64 = dataUrl.split(',')[1];
+      console.log('[debug] base64 length:', base64?.length)
+      console.log('[debug] starts with:', base64?.slice(0,20))
+      uploadFileToServer(base64);
+    };
+    reader.readAsDataURL(file)
+  }
+}
+
+const uploadFileToServer = async (base64String) => {
+  try {
+    const body = {Image: base64String}
+
+      console.log('[debug] sending keys:', Object.keys(body))
+      console.log('[debug] Image length:', body.Image?.length)
+
+    const response = await fetch ('https://us-central1-frontend-simplified.cloudfunctions.net/skinstricPhaseTwo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'},
+      body: JSON.stringify({body}),
+    });
+    if (response.ok){
+      console.log('File Uploaded succesfully!');
+      'Image Analyzed Succcesfully!'
+    } else {
+      const errText = await response.text()
+      console.error('File Upload Failed', response.status, errText)
+    }
+  } catch (error) {
+    console.error('Error uploading file:', error)
+  }
+}
+
   return (
     <div>
       <div className="sub-header">TO START ANALYSIS</div>
@@ -34,7 +81,16 @@ const Analyze = () => {
               <div className="diamond d2"></div>
               <div className="diamond d3"></div>
             </div>
-            <button className="camera-access">
+            
+            <input type="file"
+            ref={fileInputRef}
+            style={{ display: 'none'}}
+            onChange={handleFileChange}
+            accept="image/*"
+            />
+
+
+            <button className="camera-access" onClick={triggerFileInput}>
               <img className="gallery-img" src={access_gallery} alt="" />
             </button>
             <p className="img-para right">

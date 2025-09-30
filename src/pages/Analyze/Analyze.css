@@ -1,181 +1,204 @@
-.container{
- display: flex;
- gap: 50%;
- justify-content: center;
- align-items: center;
- height: calc(100vh - 72px)
+.container {
+  display: flex;
+  gap: 50%;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 72px);
 }
 
-.camera-access{
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.3s ease;
+.camera-access {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .camera-access img {
-    position: absolute;
+  position: absolute;
 }
 
-.shutter-blk, .gallery-img{
-     border: 2px solid rgba(26,27,28,1);
-    border-radius: 50%;
-    height: auto;
-    padding: 12px;
+.shutter-blk,
+.gallery-img {
+  border: 2px solid rgba(26, 27, 28, 1);
+  border-radius: 50%;
+  height: auto;
+  padding: 12px;
 }
 
-.cameras{
-position: relative;
- display: flex;
- align-items: center;
- gap: 16px;
+.cameras {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
   margin-bottom: 110px;
 }
 
-.img-para{
+.img-para {
+  position: absolute;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 400;
+  color: rgba(26, 27, 28, 1);
+  margin: 0;
+  opacity: 1 !important;
+  white-space: nowrap;
+}
+
+.img-para.left {
+  bottom: 90px;
+  left: 90px;
+}
+
+.img-para.right {
+  top: 90px;
+  right: 90px;
+}
+
+.camera-access:hover {
+  transform: scale(1.1);
+}
+
+.img-para::before {
+  content: "";
+  position: absolute;
+  width: 78px;
+  height: 1px;
+  background: rgba(26, 27, 28, 1);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.img-para::after {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid rgba(26, 27, 28, 1);
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.img-para.left::before {
+  top: 50px;
+  left: -80px;
+  transform: rotate(-40deg);
+}
+.img-para.left::after {
+  left: -10px;
+  transform: translate(-50%, -50%);
+}
+
+.img-para.right::before {
+  top: auto;
+  bottom: 48px;
+  right: -80px;
+  transform: rotate(-50deg);
+}
+
+.img-para.right::after {
+  top: 32px;
+  right: -20px;
+  transform: translate(-50%, -50%);
+}
+
+.analyze-page .diamond.d1 {
+  width: clamp(30px, 20vw, 250px);
+  height: clamp(30px, 20vw, 250px);
+  opacity: 0.4;
+  animation-duration: 60s;
+}
+
+.analyze-page .diamond.d2 {
+  width: clamp(40px, 30vw, 330px);
+  height: clamp(40px, 30vw, 320px);
+  opacity: 0.2;
+  animation-duration: 80s;
+}
+.analyze-page .diamond.d3 {
+  width: clamp(50px, 35vw, 370px);
+  height: clamp(50px, 35vw, 370px);
+  opacity: 0.1;
+  animation-duration: 100s;
+}
+
+@media (max-width: 780px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .camera-access {
+    width: 80px;
+    height: 80px;
+    position: relative;
+  }
+
+  .camera-access img {
     position: absolute;
-    font-size: 14px;
-    line-height: 24px;
-    font-weight: 400;
-    color: rgba(26,27,28,1);
-    margin: 0;
-    opacity: 1 !important;
-    white-space: nowrap;
-}
-
-.img-para.left{
-    bottom: 90px;
-    left: 90px;
-}
-
-.img-para.right{
-   top: 90px;
-   right: 90px;
-}
-
-
-.camera-access:hover{
-    transform: scale(1.1);
-}
-
-.img-para::before{
-    content:"";
-    position: absolute;
-    width: 78px;
-    height: 1px;
-    background: rgba(26,27,28,1);
     top: 50%;
-    transform: translateY(-50%);
-}
-
-.img-para::after{
-    content: "";
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: transparent;
-    border: 1px solid rgba(26,27,28,1);
-    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
-    
-}
+    width: 100%;
+    height: 100%;
+  }
 
-.img-para.left::before{
-    top: 50px;
-    left:-80px;
-    transform: rotate(-40deg);
-}
-.img-para.left::after{
-    left: -10px;
-    transform: translate(-50%,-50%);
-}
+  .camera-access img.shutter {
+    width: 80%;
+  }
 
-.img-para.right::before{
-    top: auto;
-    bottom: 48px;
-    right: -80px;
-    transform: rotate(-50deg);
-}
+  .img-para::after,
+  .img-para::before {
+    display: none;
+  }
 
-.img-para.right::after{
-    top: 32px;
-    right: -20px;
-    transform: translate(-50%,-50%);
-}
+  .img-para {
+    font-size: 12px;
+    line-height: 18px;
+  }
 
-.analyze-page .diamond.d1{
-    width: clamp(100px, 20vw, 250px);
-    height: clamp(100px, 20vw, 250px);
-    opacity: 0.4;
-    animation-duration: 60s;
-}
-
-.analyze-page .diamond.d2{
-     width: clamp(90px, 30vw, 330px);
-    height: clamp(90px, 30vw, 320px);
-    opacity: 0.2;
-    animation-duration: 80s;
-}
-.analyze-page .diamond.d3{
-     width: clamp(100px, 35vw, 370px);
-    height: clamp(100px, 35vw, 370px);
-    opacity: 0.1;
-    animation-duration: 100s;
-}
-
-@media (max-width: 780px ) {
-    .container{
-        display: flex;
-        flex-direction: column;
-        gap: 40px;
-    }
-
-    .camera-access{
-        width: 80px;
-        height: 80px;
-        position: relative;
-    }
-
-    .camera-access img{
-        position: absolute;
-       top: 50%;
-       left: 50%;
-       transform: translate(-50%, -50%);
-       width: 100%;
-       height: 100%;
-    }
-
-    .camera-access img.shutter{
-        width: 70%;
-    }
-      
-    .img-para::after, .img-para::before {
-        display: none;
-    }
-
-    .img-para{
-        font-size: 12px;
-        line-height: 18px;
-    }
-
-    .shutter-blk, .gallery-img{
-          border: 2px solid rgba(26,27,28,1);
+  .shutter-blk,
+  .gallery-img {
+    border: 2px solid rgba(26, 27, 28, 1);
     border-radius: 50%;
     height: auto;
-    padding: 4px
-    }
+    padding: 4px;
+  }
 
-    .analyze-page .diamond.d1,
-    .analyze-page .diamond.d2,
-    .analyze-page .diamond.d3{
-        opacity: .2;
-    }
+  .analyze-page .diamond.d1,
+  .analyze-page .diamond.d2,
+  .analyze-page .diamond.d3 {
+    opacity: 0.2;
+  }
+  .analyze-page .diamond.d1 {
+    width: 100px;
+    height: 100px;
+  }
+  .analyze-page .diamond.d2 {
+    width: 150px;
+    height: 150px;
+  }
+  .analyze-page .diamond.d3 {
+    width: 180px;
+    height: 180px;
+  }
 
-    
+  .btn-img {
+    width: 30px;
+    height: 40px;
+  }
+  .back-button{
+    gap: 8px;
+    font-size: 14px;
+  }
+
+ .sub-header{
+    font-size: 12px;
+  }
 }
-
