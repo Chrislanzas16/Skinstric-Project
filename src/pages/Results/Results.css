@@ -1,0 +1,15 @@
+.results-sub-header{
+    margin-left: 30px;
+    margin-top: 10px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 15px;
+    color: rgba(26,27,28,1);
+    opacity: 1;
+}
+
+.summary-btn{
+    position: fixed;
+    bottom: 32px;
+    right: 30px;
+}

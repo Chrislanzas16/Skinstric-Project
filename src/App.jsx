@@ -4,6 +4,8 @@ import Navbar from "./components/Navbar/Navbar.jsx";
 import Home from "./pages/Home/Home.jsx";
 import Login from "./pages/Login/Login.jsx";
 import Analyze from "./pages/Analyze/Analyze.jsx";
+import Results from "./pages/Results/Results.jsx";
+import Demographics from "./pages/Demographics/Demographics.jsx";
 
 const App = () => {
   return <Router>
@@ -12,6 +14,8 @@ const App = () => {
      <Route path="/" element={<Home />} />
      <Route path="/login" element={<Login />} />
      <Route path="/analyze" element={<Analyze />} />
+     <Route path="results" element={<Results />} />
+     <Route path="/demographics" element={<Demographics />} />
      </Routes>
 
   </Router>;
