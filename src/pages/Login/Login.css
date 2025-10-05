@@ -248,3 +248,8 @@ p {
     font-size: 16px;
 }
 
+@media(max-width:720px){
+  .status-title{
+    font-size: 20px;
+  }
+}

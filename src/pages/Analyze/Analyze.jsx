@@ -23,16 +23,17 @@ const Analyze = () => {
       reader.onloadend = () => {
         const dataUrl = String(reader.result);
         setPreview(dataUrl);
-        uploadFileToServer(dataUrl);
+        const base64 = dataUrl.split(",")[1];
+        uploadFileToServer(base64);
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const uploadFileToServer = async (imageDataUrl) => {
+  const uploadFileToServer = async (imagebase64) => {
     setIsLoading(true);
     try {
-      const body = { image: imageDataUrl };
+      const body = { image: imagebase64 };
 
       const response = await fetch(
         "https://us-central1-frontend-simplified.cloudfunctions.net/skinstricPhaseTwo",
@@ -45,10 +46,11 @@ const Analyze = () => {
         }
       );
       if (response.ok) {
+        const json = await response.json();
         console.log("File Uploaded succesfully!");
         alert("Image analyzed succesfully!");
         setIsLoading(false);
-        navigate("/results");
+        navigate("/results", { state: { demographics: json.data } });
       } else {
         const errText = await response.text();
         console.error("File Upload Failed", response.status, errText);
@@ -67,14 +69,12 @@ const Analyze = () => {
       <div className="analyze-page">
         {isLoading ? (
           <>
-
-               <div className="preview-box">
+            <div className="preview-box">
               <div className="preview-title">Preview</div>
               <div className="preview-screen">
                 {preview && <img src={preview} />}
               </div>
             </div>
-
 
             <div className="loading-wrapper">
               <div className="spin-stack-wrapper">

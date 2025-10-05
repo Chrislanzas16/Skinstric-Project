@@ -12,13 +12,33 @@ const Results = () => {
       <h5 className="results-sub-header">
         FIX ESTIMATED INFORMATION IF NEEDED.
       </h5>
-       <div className="summary-btn">
-      <Link to="/demographics">
-        <button className="proceed-button">
-          GET SUMMARY
-          <img className="btn-img" src={right_btn} alt="" />
-        </button>
-      </Link>
+
+      <div className="results-wrapper">
+        <div className="results-container">
+          <Link to="/demographics" className="menu click">
+            <span>DEMOGRAPHICS</span>
+          </Link>
+
+          <div className="menu">
+            {" "}
+            <span>COSMETIC CONCERNS</span>
+          </div>
+          <div className="menu">
+            <span>SKIN TYPE DETAILS</span>
+          </div>
+          <div className="menu">
+            <span>WEATHER</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="summary-btn">
+        <Link to="/demographics">
+          <button className="proceed-button">
+            GET SUMMARY
+            <img className="btn-img" src={right_btn} alt="" />
+          </button>
+        </Link>
       </div>
 
       <div className="back-btn">
