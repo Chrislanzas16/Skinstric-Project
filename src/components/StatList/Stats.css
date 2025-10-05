@@ -1,0 +1,13 @@
+.stat-head{
+   display: grid;
+grid-template-columns: 1fr auto;
+padding: 10px 12px;
+}
+
+.race-row .outer-white{
+    filter: none;
+}
+
+.race-row.is-selected .outer-white{
+    filter: brightness(0) invert(1);
+}

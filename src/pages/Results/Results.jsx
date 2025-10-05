@@ -1,10 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import back_btn from "../../assets/images/buttin-icon-shrunk (1).svg";
 import right_btn from "../../assets/images/buttin-icon-shrunk.svg";
 import "./Results.css";
 
 const Results = () => {
+    const location = useLocation()
+    const demographics = location.state?.demographics;
   return (
     <div className="results-page">
       <div className="sub-header">A.I ANALYSIS</div>
@@ -15,7 +17,7 @@ const Results = () => {
 
       <div className="results-wrapper">
         <div className="results-container">
-          <Link to="/demographics" className="menu click">
+          <Link to="/demographics" state={{demographics}} className="menu click">
             <span>DEMOGRAPHICS</span>
           </Link>
 
@@ -33,7 +35,7 @@ const Results = () => {
       </div>
 
       <div className="summary-btn">
-        <Link to="/demographics">
+        <Link to="/demographics" state={{demographics}}>
           <button className="proceed-button">
             GET SUMMARY
             <img className="btn-img" src={right_btn} alt="" />

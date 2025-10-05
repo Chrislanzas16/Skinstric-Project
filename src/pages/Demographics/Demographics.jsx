@@ -1,11 +1,61 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import "./Demographics.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import back_btn from "../../assets/images/buttin-icon-shrunk (1).svg";
 import right_btn from "../../assets/images/buttin-icon-shrunk.svg";
-import outer_line from "../../assets/images/rect-outer-line.svg";
+import Stats from "../../components/StatList/Stats";
+import Donut from "../../components/Donut/Donut";
 
-const Demographics = ({ data }) => {
+const Demographics = () => {
+  const [selected, setSelected] = useState({
+    race: null,
+    age: null,
+    sex: null,
+  });
+  const [active, setActive] = useState("race");
+  const { state } = useLocation();
+  const navigate = useNavigate();
+  const data =
+    state?.demographics || JSON.parse(sessionStorage.getItem("demographics"));
+
+  if (!data) {
+    navigate("/analyze");
+    return null;
+  }
+
+  const toItems = (obj) =>
+    Object.entries(obj)
+      .map(([name, v]) => ({ name, percent: Number((v * 100).toFixed(2)) }))
+      .sort((a, b) => b.percent - a.percent);
+
+  const raceItems = toItems(data.race);
+  const ageItems = toItems(data.age);
+  const sexItems = toItems(data.gender);
+
+  const idOfMax = (arr = []) =>
+    arr.length
+      ? arr.reduce(
+          (best, x, i, a) => (x.percent > a[best].percent ? i : best),
+          0
+        )
+      : 0;
+
+  const selectedIdx = (section) => {
+    if (section === "race") return selected.race ?? idOfMax(raceItems);
+    if (section === "age") return selected.age ?? idOfMax(ageItems);
+    return selected.sex ?? idOfMax(sexItems);
+  };
+
+  const current = useMemo(() => {
+    if (active === "age") return { key: "age", title: "Age", items: ageItems };
+    if (active === "sex") return { key: "sex", title: "Sex", items: sexItems };
+    return { key: "race", title: "Race", items: raceItems };
+  }, [active, raceItems, ageItems, sexItems]);
+
+  const currentIndex = selected[current.key] ?? idOfMax(current.items);
+  const centerName = current.items[currentIndex]?.name ?? "";
+  const centerPct = current.items[currentIndex]?.percent ?? 0;
+
   return (
     <div className="demo-page">
       <div className="sub-header">A.I ANALYSIS</div>
@@ -17,23 +67,49 @@ const Demographics = ({ data }) => {
 
       <div className="container-grid">
         <div className="left-grid">
-          <div className="left-box">
-            <p className="demo-para">Southeast Asian</p>
+          <button
+            className={`left-box ${active === "race" ? "is-active" : ""}`}
+            onClick={() => setActive("race")}
+          >
+            <p className="demo-para">
+              {raceItems[selectedIdx("race")]?.name ?? "-"}
+            </p>
             <h4 className="demo-sub-title">RACE</h4>
-          </div>
-          <div className="left-box">
-            <p className="demo-para">10-19</p>
+          </button>
+
+          <button
+            className={`left-box ${active === "age" ? "is-active" : ""}`}
+            onClick={() => setActive("age")}
+          >
+            <p className="demo-para">
+              {ageItems[selectedIdx("age")]?.name ?? "-"}
+            </p>
             <h4 className="demo-sub-title">AGE</h4>
-          </div>
-          <div className="left-box">
-            <p className="demo-para">Male</p>
+          </button>
+
+          <button
+            className={`left-box ${active === "sex" ? "is-active" : ""}`}
+            onClick={() => setActive("sex")}
+          >
+            <p className="demo-para">
+              {sexItems[selectedIdx("sex")]?.name ?? "-"}
+            </p>
             <h4 className="demo-sub-title">SEX</h4>
-          </div>
+          </button>
         </div>
         <div className="center-grid">
-          <h1 className="center-title">Southeast Asian</h1>
+          <h1 className="center-title">{centerName}</h1>
+          <Donut percent={centerPct}  />
         </div>
-        <div className="right-grid"></div>
+        <div className="right-grid">
+          <div className="right-title"></div>
+          <Stats
+            title={current.title}
+            items={current.items}
+            selectedIndex={currentIndex}
+            onSelect={(i) => setSelected((s) => ({ ...s, [current.key]: i }))}
+          />
+        </div>
       </div>
 
       <div className="summary-btn">

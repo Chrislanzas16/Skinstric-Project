@@ -1,0 +1,22 @@
+.donut-wrap {
+    position: relative;
+    display: inline-block;
+}
+
+.donut-track{
+    stroke: #d9d9d9;
+}
+
+.donut-arc{
+    stroke: #000;
+    transition: stroke-dasharray .45s ease;
+}
+
+.donut-label{
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 30px;
+    font-weight: 500;
+}
