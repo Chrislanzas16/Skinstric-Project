@@ -1,0 +1,83 @@
+.camera-page {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: #000;
+}
+
+.camera-feed {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.capture-wrapper {
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.capture-btn {
+  background: #fff;
+  border: 2px solid #fff;
+  outline: 2px solid rgba(255,255,255,0.5);
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.capture-icon {
+  width: 28px;
+  height: 28px;
+  filter: none;
+}
+
+.capture-text {
+  font-size: 14px;
+  margin-bottom: 6px;
+  pointer-events: none;
+  color: #fff;
+}
+
+.camera-page .back-button {
+  position: absolute;
+  bottom: 90px;
+  left: 20px;
+  background: none;
+  border: none;
+  color: #fff;
+}
+
+.camera-page .btn-img {
+  filter: brightness(0) invert(1);
+}
+
+.camera-overlay {
+  position: absolute;
+  bottom: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #fff;
+  z-index: 1000;
+}
+
+.camera-overlay .overlay-title {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.camera-overlay .overlay-tips {
+  font-size: 14px;
+  opacity: 0.8;
+}

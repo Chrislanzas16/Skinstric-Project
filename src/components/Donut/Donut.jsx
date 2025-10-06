@@ -1,7 +1,7 @@
 import React from 'react'
 import "./Donut.css"
 
-const Donut = ({percent = 0, size = 300, stroke = 12}) => {
+const Donut = ({percent = 0, size = 350, stroke = 12}) => {
     const p = Math.max(0, Math.min(100, Number(percent) || 0))
     const r = (size - stroke) / 2
     const C = 2 * Math.PI * r

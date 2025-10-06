@@ -11,8 +11,36 @@ const Analyze = () => {
   const fileInputRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const [preview, setPreview] = useState(null);
+  const [access, setAccess] = useState(false);
+  const [allowAccess, setAllowAccess] = useState(false);
+  const videoRef = useRef(null);
+  const [loadingType, isLoadingType] = useState("");
+
+  const handleAllow = async () => {
+    setAccess(false);
+    isLoadingType("camera");
+    setIsLoading(true);
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+
+      setAllowAccess(true);
+      setTimeout(() => {
+        setIsLoading(false);
+        navigate("/camera");
+      }, 1500);
+    } catch (err) {
+      console.log("Camera access denied");
+      setAllowAccess(false);
+      setIsLoading(false);
+    }
+  };
 
   const triggerFileInput = () => {
+    isLoadingType("gallery");
     fileInputRef.current.click();
   };
 
@@ -67,7 +95,38 @@ const Analyze = () => {
       <div className="sub-header">TO START ANALYSIS</div>
 
       <div className="analyze-page">
-        {isLoading ? (
+        {isLoading && loadingType === "camera" && (
+          <>
+            <div className="camera-loader">
+              <div className="loading-wrapper">
+                <div className="spin-stack-wrapper">
+                  <div className="spin-stack" aria-hidden="true">
+                    <div className="diamond d1"></div>
+                    <div className="diamond d2"></div>
+                    <div className="diamond d3"></div>
+
+                    
+
+
+                    <button className="camera-access">
+                      <img className="shutter-blk" src={scan_black} alt="" />
+                      <img className="shutter" src={scan_img} alt="" />
+                    </button>
+                    <h2 className="camera-load-title">SETTING UP YOUR CAMERA...</h2>
+                  </div>
+                </div>
+                <h3 className="load-camera-tip">TO GET BETTER RESULTS MAKE SURE TO HAVE</h3>
+                <div className="loading-tips">
+                  <span>Neutral Expression</span>
+                  <span>Frontal Pose</span>
+                  <span>Adequate Lighting</span>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+
+        {isLoading && loadingType === "gallery" && (
           <>
             <div className="preview-box">
               <div className="preview-title">Preview</div>
@@ -83,6 +142,7 @@ const Analyze = () => {
                   <div className="diamond d2"></div>
                   <div className="diamond d3"></div>
                 </div>
+
                 <div className="status">
                   <h2 className="status-title">PREPARING YOUR ANALYSIS...</h2>
                   <div className="dots">
@@ -94,7 +154,9 @@ const Analyze = () => {
               </div>
             </div>
           </>
-        ) : (
+        )}
+
+        {!isLoading && (
           <div className="container">
             <div className="cameras">
               <div className="spin-stack" aria-hidden="true">
@@ -102,7 +164,7 @@ const Analyze = () => {
                 <div className="diamond d2"></div>
                 <div className="diamond d3"></div>
               </div>
-              <button className="camera-access">
+              <button className="camera-access" onClick={() => setAccess(true)}>
                 <img className="shutter-blk" src={scan_black} alt="" />
                 <img className="shutter" src={scan_img} alt="" />
               </button>
@@ -110,6 +172,36 @@ const Analyze = () => {
                 ALLOW A.I <br /> TO SCAN YOUR FACE
               </p>
             </div>
+
+            {access && (
+              <div className="access-overlay" role="dialog" aria-modal="true">
+                <div className="access-box">
+                  <h3 className="access-title">
+                    ALLOW A.I TO ACCESS YOUR CAMERA
+                  </h3>
+
+                  <div className="access-divider" />
+
+                  <div className="access-actions">
+                    <button
+                      type="button"
+                      className="access-btn access-deny"
+                      onClick={() => setAccess(false)}
+                    >
+                      Deny
+                    </button>
+
+                    <button
+                      type="button"
+                      className="access-btn access-allow"
+                      onClick={handleAllow}
+                    >
+                      Allow
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
 
             <div className="cameras">
               <div className="spin-stack" aria-hidden="true">
