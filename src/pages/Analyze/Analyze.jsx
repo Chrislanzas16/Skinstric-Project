@@ -4,6 +4,7 @@ import back_btn from "../../assets/images/buttin-icon-shrunk (1).svg";
 import scan_img from "../../assets/images/shutter.svg";
 import scan_black from "../../assets/images/sgutter-bg.svg";
 import access_gallery from "../../assets/images/gallery.svg";
+import outer_line from "../../assets/images/rect-outer-line.svg";
 import "./Analyze.css";
 
 const Analyze = () => {
@@ -78,6 +79,7 @@ const Analyze = () => {
         console.log("File Uploaded succesfully!");
         alert("Image analyzed succesfully!");
         setIsLoading(false);
+        sessionStorage.setItem("demographics", JSON.stringify(json.data))
         navigate("/results", { state: { demographics: json.data } });
       } else {
         const errText = await response.text();
@@ -117,9 +119,9 @@ const Analyze = () => {
                 </div>
                 <h3 className="load-camera-tip">TO GET BETTER RESULTS MAKE SURE TO HAVE</h3>
                 <div className="loading-tips">
-                  <span>Neutral Expression</span>
-                  <span>Frontal Pose</span>
-                  <span>Adequate Lighting</span>
+                 <img src={outer_line} alt="" /> <span>Neutral Expression</span>
+                 <img src={outer_line} alt="" /> <span>Frontal Pose</span>
+                 <img src={outer_line} alt="" /> <span>Adequate Lighting</span>
                 </div>
               </div>
             </div>

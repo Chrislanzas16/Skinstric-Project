@@ -128,20 +128,20 @@ p {
 }
 
 .d1 {
-  width: clamp(100px, 42vw, 480px);
-  height: clamp(110px, 42vw, 480px);
+  width: clamp(100px, 42vw, 400px);
+  height: clamp(110px, 42vw, 400px);
   opacity: 0.8;
   animation-duration: 95s;
 }
 .d2 {
-  width: clamp(160px, 54vw, 550px);
-  height: clamp(140px, 54vw, 550px);
+  width: clamp(160px, 54vw, 480px);
+  height: clamp(140px, 54vw, 480px);
   opacity: 0.4;
   animation-duration: 120s;
 }
 .d3 {
-  width: clamp(150px, 68vw, 600px);
-  height: clamp(150px, 68vw, 600px);
+  width: clamp(150px, 68vw, 500px);
+  height: clamp(150px, 68vw, 500px);
   opacity: 0.2;
   animation-duration: 160s;
 }

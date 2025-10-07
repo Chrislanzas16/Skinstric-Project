@@ -1,6 +1,6 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./Demographics.css";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import back_btn from "../../assets/images/buttin-icon-shrunk (1).svg";
 import right_btn from "../../assets/images/buttin-icon-shrunk.svg";
 import Stats from "../../components/StatList/Stats";
@@ -13,24 +13,32 @@ const Demographics = () => {
     sex: null,
   });
   const [active, setActive] = useState("race");
-  const { state } = useLocation();
+
+  const [demo, setDemo] = useState(null);
   const navigate = useNavigate();
-  const data =
-    state?.demographics || JSON.parse(sessionStorage.getItem("demographics"));
+  const [loaded, setLoaded] = useState(false);
 
-  if (!data) {
-    navigate("/analyze");
-    return null;
-  }
+  useEffect(() => {
+    const saved = JSON.parse(sessionStorage.getItem("demographics") || "null");
+    setDemo(saved);
+    setLoaded(true);
+    if (!saved) navigate("/analyze", { replace: true });
+  }, [navigate]);
 
-  const toItems = (obj) =>
+  const toItems = (obj = {}) =>
     Object.entries(obj)
       .map(([name, v]) => ({ name, percent: Number((v * 100).toFixed(2)) }))
       .sort((a, b) => b.percent - a.percent);
 
-  const raceItems = toItems(data.race);
-  const ageItems = toItems(data.age);
-  const sexItems = toItems(data.gender);
+  const raceItems = useMemo(
+    () => (demo?.race ? toItems(demo.race) : []),
+    [demo]
+  );
+  const ageItems = useMemo(() => (demo?.age ? toItems(demo.age) : []), [demo]);
+  const sexItems = useMemo(
+    () => (demo?.gender ? toItems(demo.gender) : []),
+    [demo]
+  );
 
   const idOfMax = (arr = []) =>
     arr.length
@@ -55,6 +63,8 @@ const Demographics = () => {
   const currentIndex = selected[current.key] ?? idOfMax(current.items);
   const centerName = current.items[currentIndex]?.name ?? "";
   const centerPct = current.items[currentIndex]?.percent ?? 0;
+
+  if (!loaded || !demo) return null;
 
   return (
     <div className="demo-page">
@@ -99,7 +109,7 @@ const Demographics = () => {
         </div>
         <div className="center-grid">
           <h1 className="center-title">{centerName}</h1>
-          <Donut percent={centerPct}  />
+          <Donut percent={centerPct} />
         </div>
         <div className="right-grid">
           <div className="right-title"></div>

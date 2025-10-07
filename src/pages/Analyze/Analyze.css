@@ -142,8 +142,8 @@
   position: relative;
   display: grid;
   place-items: center;
-  width: clamp(180px, 32vw, 300px);
-  height: clamp(180px, 32vw, 300px);
+  width: clamp(200px, 32vw, 300px);
+  height: clamp(200px, 32vw, 300px);
 }
 .spin-stack-wrapper .status {
   position: absolute;
@@ -262,64 +262,78 @@
   opacity: 0.85;
 }
 
-.loading-tips{
-    margin-top: 20px;
-    display: flex;
-    gap: 18px;
-    justify-content: center;
-    opacity: .8;
-    font-size: .95rem;
+.loading-tips {
+  margin-top: 20px;
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  opacity: 0.8;
+  font-size: 0.95rem;
 }
 
-.camera-loader{
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.camera-loader {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-.camera-loader .spin-stack{
-    position: relative;
-    width: 220px;
-    height: 220px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 2rem;
+.camera-loader .spin-stack {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 2rem;
 }
 
-
-.camera-loader .loading-wrapper{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
+.camera-loader .loading-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
 }
 
-
-.camera-loader .shutter-blk .shutter{
-   position: relative;
-    width: 60px;
-    height: auto;
-    z-index: 9;
+.camera-loader .shutter-blk .shutter {
+  position: relative;
+  width: 60px;
+  height: auto;
+  z-index: 9;
 }
 
-.camera-load-title{
-    position: absolute;
-    top: 12px;
-    font-size: 16px;
-    font-weight: 400;
+.camera-load-title {
+  position: absolute;
+  top: 12px;
+  font-size: 16px;
+  font-weight: 400;
 }
 
-.load-camera-tip{
-    font-weight: 400;
+.load-camera-tip {
+  font-weight: 400;
 }
 
+@keyframes breathe {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
+.camera-loader .camera-load-title,
+.camera-loader .shutter,
+.camera-loader .shutter-blk {
+  animation: breathe 2s ease-in-out infinite;
+}
 
 @media (max-width: 780px) {
   .container {
@@ -401,9 +415,33 @@
     top: 50px;
   }
 
-  .load-camera-tip{
+  .load-camera-tip {
     font-size: 14px;
   }
 
+  .analyze-page .camera-load-title {
+    font-size: 14px;
+    font-weight: 300;
+  }
 
+  .analyze-page .load-camera-tip {
+    font-size: 12px;
+    font-weight: 300;
+  }
+
+  .analyze-page .loading-tips {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .analyze-page .loading-tips span {
+    font-size: 13px;
+  }
+
+  .camera-loader .shutter-blk .shutter {
+    width: 50px;
+  }
 }
